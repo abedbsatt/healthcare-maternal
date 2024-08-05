@@ -2,7 +2,6 @@
 #####CHILDBIRTH GRAPH
 
 import plotly.graph_objects as go
-from anaemia import plot_anemia_trends, plot_anemia_comparison
 
 # Data
 indicators = ['Childbirth by<br>skilled attendant', 'Childbirth by<br>unskilled attendant']
@@ -1345,6 +1344,98 @@ def maternal_mr_graph(start_year, end_year):
     return fig_maternal_mr
 
 # %% [markdown]
+# Loading CSV
+
+# %%
+def load_and_clean_data(file_path):
+    data = pd.read_csv(file_path, skiprows=1)
+    data.columns = ['GHO_CODE', 'GHO_DISPLAY', 'GHO_URL', 'YEAR_DISPLAY', 'STARTYEAR', 
+                    'ENDYEAR', 'REGION_CODE', 'REGION_DISPLAY', 'COUNTRY_CODE', 
+                    'COUNTRY_DISPLAY', 'DIMENSION_TYPE', 'DIMENSION_CODE', 
+                    'DIMENSION_NAME', 'Numeric', 'Value', 'Low', 'High']
+
+    data['YEAR_DISPLAY'] = pd.to_numeric(data['YEAR_DISPLAY'], errors='coerce')
+    data['Numeric'] = pd.to_numeric(data['Numeric'], errors='coerce')
+    data['Low'] = pd.to_numeric(data['Low'], errors='coerce')
+    data['High'] = pd.to_numeric(data['High'], errors='coerce')
+
+    data.dropna(subset=['YEAR_DISPLAY', 'Numeric'], inplace=True)
+    return data
+
+# %% [markdown]
+# Anemia Trends
+
+# %%
+def plot_anemia_trends():
+    file_path = "C:\\Users\\hossc\\Downloads\\maternal_and_reproductive_health_indicators_lbn (1).csv"
+    data = load_and_clean_data(file_path)
+    indicator_code = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
+    filtered_data = data[data['GHO_CODE'] == indicator_code]
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data, marker='o')
+
+    plt.xticks(ticks=filtered_data['YEAR_DISPLAY'].unique(), 
+               labels=filtered_data['YEAR_DISPLAY'].unique().astype(int), 
+               rotation=0, fontweight='bold')
+
+    plt.yticks(fontweight='bold')
+
+    plt.title('Trend of Number of Non-Pregnant Women with Anemia Over Years', fontweight='bold')
+    plt.xlabel('Year', fontweight='bold')
+    plt.ylabel('Number of Women', fontweight='bold')
+    plt.grid(False)
+
+    sns.set(style="whitegrid")
+    sns.despine(left=True, bottom=True)
+    plt.tight_layout()
+    return plt
+
+# %% [markdown]
+# Anemia Comparison
+
+# %%
+def plot_anemia_comparison():
+    file_path = "C:\\Users\\hossc\\Downloads\\maternal_and_reproductive_health_indicators_lbn (1).csv"
+    data = load_and_clean_data(file_path)
+    
+    indicator_code_1 = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
+    indicator_code_2 = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
+
+    filtered_data_1 = data[data['GHO_CODE'] == indicator_code_1]
+    filtered_data_2 = data[data['GHO_CODE'] == indicator_code_2]
+
+    comparison_data = pd.merge(filtered_data_1[['YEAR_DISPLAY', 'Numeric']], 
+                               filtered_data_2[['YEAR_DISPLAY', 'Numeric']], 
+                               on='YEAR_DISPLAY', 
+                               suffixes=('_non_pregnant', '_pregnant'))
+    
+    fig, ax1 = plt.subplots(figsize=(12, 6))
+
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric_non_pregnant', data=comparison_data, marker='o', ax=ax1, color='blue', label='Non-Pregnant Women')
+    ax1.set_xlabel('Year', fontweight='bold')
+    ax1.set_ylabel('Number of Non-Pregnant Women', fontweight='bold', color='blue')
+    ax1.tick_params(axis='y', labelcolor='blue')
+    ax1.set_xticks(comparison_data['YEAR_DISPLAY'].unique())
+    ax1.set_xticklabels(comparison_data['YEAR_DISPLAY'].unique().astype(int), fontweight='bold')
+    ax1.grid(False)
+
+    ax2 = ax1.twinx()
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric_pregnant', data=comparison_data, marker='o', ax=ax2, color='orange', label='Pregnant Women')
+    ax2.set_ylabel('Number of Pregnant Women', fontweight='bold', color='orange')
+    ax2.tick_params(axis='y', labelcolor='orange')
+    ax2.grid(False)
+
+    plt.title('Comparison of Number of Women with Anemia Over Years', fontweight='bold')
+
+    # Combine legends from both plots
+    lines_1, labels_1 = ax1.get_legend_handles_labels()
+    lines_2, labels_2 = ax2.get_legend_handles_labels()
+    ax2.legend(lines_1 + lines_2, labels_1 + labels_2, loc='upper left', fontsize='large', title_fontsize='13')
+
+    fig.tight_layout()
+    return plt
+
+# %% [markdown]
 # ## Streamlit
 
 # %%
@@ -1380,7 +1471,7 @@ page = st.sidebar.radio("Go to", ["Introduction", "Graphs", "Recommendations"])
 
 if page == "Introduction":
     st.header("Introduction")
-    st.image("Downpic.cc-2296723531.jpg", use_column_width=True)
+    st.image("C:\\Users\\hossc\\Downloads\\Downpic.cc-2296723531.jpg", use_column_width=True)
     st.write("""
         Welcome to the Lebanese Health Statistics Dashboard. This dashboard aims to provide insights into maternal and reproductive health in Lebanon. 
         Our project focuses on analyzing various health statistics related to childbirth, neonatal mortality, and maternal mortality. 
@@ -1402,7 +1493,9 @@ elif page == "Graphs":
         "Lebanese Births and Deaths",
         "Lebanese and Non-Lebanese Births",
         "Neonatal Mortality Rate",
-        "Maternal Mortality Rate"
+        "Maternal Mortality Rate",
+        "Anemia Trends",
+        "Comparison of Anemia in Non-Pregnant and Pregnant Women"
     ))
 
     year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
@@ -1423,6 +1516,10 @@ elif page == "Graphs":
         st.plotly_chart(neonatal_mr_graph(year_range[0], year_range[1]))
     elif option == "Maternal Mortality Rate":
         st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]))
+    elif option == "Anemia Trends":
+        st.pyplot(plot_anemia_trends().gcf())
+    elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
+        st.pyplot(plot_anemia_comparison().gcf())
 
 elif page == "Recommendations":
     st.header("Recommendations and Conclusion")
