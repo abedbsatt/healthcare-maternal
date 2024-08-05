@@ -1387,7 +1387,7 @@ def load_and_clean_data(file_path):
     # Perform your data cleaning steps
     return data
 
-def plot_anemia_trends():
+def plot_anemia_trends_non_pregnant():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
     
@@ -1404,21 +1404,40 @@ def plot_anemia_trends():
 
     plt.yticks(fontweight='bold')
 
-    plt.title('Trend of Number of Women with Anemia Over Years', fontweight='bold')
+    plt.title('Trend of Number of Non-Pregnant Women with Anemia Over Years', fontweight='bold')
     plt.xlabel('Year', fontweight='bold')
     plt.ylabel('Number of Women', fontweight='bold')
     plt.grid(False)
     
     sns.set(style="whitegrid")
     sns.despine(left=True, bottom=True)
+    plt.tight_layout()
+    return plt
 
+def plot_anemia_trends_pregnant():
+    file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
+    data = load_and_clean_data(file_path)
+    
     # Pregnant women with anemia
     indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
     filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
     
+    plt.figure(figsize=(12, 6))
     sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_preg, marker='o', label='Pregnant Women')
     
-    plt.legend()
+    plt.xticks(ticks=filtered_data_preg['YEAR_DISPLAY'].unique(), 
+               labels=filtered_data_preg['YEAR_DISPLAY'].unique().astype(int), 
+               rotation=0, fontweight='bold')
+
+    plt.yticks(fontweight='bold')
+
+    plt.title('Trend of Number of Pregnant Women with Anemia Over Years', fontweight='bold')
+    plt.xlabel('Year', fontweight='bold')
+    plt.ylabel('Number of Women', fontweight='bold')
+    plt.grid(False)
+    
+    sns.set(style="whitegrid")
+    sns.despine(left=True, bottom=True)
     plt.tight_layout()
     return plt
     
@@ -1543,7 +1562,8 @@ elif option == "Neonatal Mortality Rate":
 elif option == "Maternal Mortality Rate":
     st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
 elif option == "Anemia Trends":
-    st.pyplot(plot_anemia_trends())
+    st.pyplot(plot_anemia_trends_non_pregnant())
+    st.pyplot(plot_anemia_trends_pregnant())
 elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
     st.pyplot(plot_anemia_comparison())
 
