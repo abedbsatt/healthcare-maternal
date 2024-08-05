@@ -1559,7 +1559,8 @@ elif page == "Facts":
                 margin: 25px 0;
                 font-size: 1.1em;
                 font-family: 'Arial', sans-serif;
-                background-color: #f2f2f2;
+                background-color: #f9f9f9;
+                color: #333;
                 border-radius: 5px 5px 0 0;
                 overflow: hidden;
                 box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
