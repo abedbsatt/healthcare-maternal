@@ -723,17 +723,17 @@ def childbirth_attendance_graph():
             'x':0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, color='white', family='Arial Black')
+            'font': dict(size=24, color='black', family='Arial Black')
         },
         showlegend=False,
-        plot_bgcolor='black',
-        paper_bgcolor='black',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
         height=600,
         margin=dict(t=100, l=50, r=50, b=100),
         xaxis=dict(
             showticklabels=False,
             range=[-0.2, 0.7],
-            color='white'
+            color='black'
         ),
         yaxis=dict(visible=False),
         bargap=0,
