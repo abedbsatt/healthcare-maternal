@@ -1584,6 +1584,9 @@ elif page == "Facts":
             .fact-table tbody tr:last-of-type {
                 border-bottom: 2px solid #009879;
             }
+            .fact-table tbody td:first-child {
+                font-weight: bold;
+            }
         </style>
     """, unsafe_allow_html=True)
     
