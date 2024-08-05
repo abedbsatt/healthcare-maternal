@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # %%
-file_path = "C:\\Users\\hossc\\Downloads\\maternal_and_reproductive_health_indicators_lbn (1).csv"
+file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
 
 # %% [markdown]
 # Data Cleaning
