@@ -1379,7 +1379,7 @@ page = st.sidebar.radio("Go to", ["Introduction", "Graphs", "Recommendations"])
 
 if page == "Introduction":
     st.header("Introduction")
-    st.image("C:\\Users\\hossc\\Downloads\\Downpic.cc-2296723531.jpg", use_column_width=True)
+    st.image("Downpic.cc-2296723531.jpg", use_column_width=True)
     st.write("""
         Welcome to the Lebanese Health Statistics Dashboard. This dashboard aims to provide insights into maternal and reproductive health in Lebanon. 
         Our project focuses on analyzing various health statistics related to childbirth, neonatal mortality, and maternal mortality. 
