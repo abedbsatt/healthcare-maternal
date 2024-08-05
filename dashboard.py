@@ -1382,24 +1382,16 @@ def plot_anemia_trends_non_pregnant():
     indicator_code_non_preg = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
     filtered_data_non_preg = data[data['GHO_CODE'] == indicator_code_non_preg]
     
-    plt.figure(figsize=(12, 6))
-    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_non_preg, marker='o', label='Non-Pregnant Women')
-    
-    plt.xticks(ticks=filtered_data_non_preg['YEAR_DISPLAY'].unique(), 
-               labels=filtered_data_non_preg['YEAR_DISPLAY'].unique().astype(int), 
-               rotation=0, fontweight='bold')
-
-    plt.yticks(fontweight='bold')
-
-    plt.title('Trend of Number of Non-Pregnant Women with Anemia Over Years', fontweight='bold')
-    plt.xlabel('Year', fontweight='bold')
-    plt.ylabel('Number of Women', fontweight='bold')
-    plt.grid(False)
-    
-    sns.set(style="whitegrid")
-    sns.despine(left=True, bottom=True)
-    plt.tight_layout()
-    return plt
+    fig = px.line(
+        filtered_data_non_preg,
+        x='YEAR_DISPLAY',
+        y='Numeric',
+        title='Trend of Number of Non-Pregnant Women with Anemia Over Years',
+        labels={'YEAR_DISPLAY': 'Year', 'Numeric': 'Number of Women'},
+        markers=True
+    )
+    fig.update_layout(title_font_size=20, xaxis_title_font_size=16, yaxis_title_font_size=16)
+    return fig
 
 def plot_anemia_trends_pregnant():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
@@ -1409,24 +1401,16 @@ def plot_anemia_trends_pregnant():
     indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
     filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
     
-    plt.figure(figsize=(12, 6))
-    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_preg, marker='o', label='Pregnant Women')
-    
-    plt.xticks(ticks=filtered_data_preg['YEAR_DISPLAY'].unique(), 
-               labels=filtered_data_preg['YEAR_DISPLAY'].unique().astype(int), 
-               rotation=0, fontweight='bold')
-
-    plt.yticks(fontweight='bold')
-
-    plt.title('Trend of Number of Pregnant Women with Anemia Over Years', fontweight='bold')
-    plt.xlabel('Year', fontweight='bold')
-    plt.ylabel('Number of Women', fontweight='bold')
-    plt.grid(False)
-    
-    sns.set(style="whitegrid")
-    sns.despine(left=True, bottom=True)
-    plt.tight_layout()
-    return plt
+    fig = px.line(
+        filtered_data_preg,
+        x='YEAR_DISPLAY',
+        y='Numeric',
+        title='Trend of Number of Pregnant Women with Anemia Over Years',
+        labels={'YEAR_DISPLAY': 'Year', 'Numeric': 'Number of Women'},
+        markers=True
+    )
+    fig.update_layout(title_font_size=20, xaxis_title_font_size=16, yaxis_title_font_size=16)
+    return fig
 
 # %% [markdown]
 # Anemia Comparison
