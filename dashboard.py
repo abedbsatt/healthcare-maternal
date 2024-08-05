@@ -1128,7 +1128,7 @@ def lebanese_non_lebanese_birth_graph(start_year, end_year):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, family='Arial Black', color='black')
+            'font': dict(size=20, family='Arial Black', color='black')  # Adjust font size here
         },
         hovermode="closest",
         plot_bgcolor='white',
@@ -1155,6 +1155,7 @@ def lebanese_non_lebanese_birth_graph(start_year, end_year):
     )
 
     return fig_births
+
     
 # %% [markdown]
 # Neonatal
@@ -1316,7 +1317,7 @@ def maternal_mr_graph(start_year, end_year):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, family='Arial Black', color='black')
+            'font': dict(size=20, family='Arial Black', color='black')  # Adjust font size here
         },
         hovermode="closest",
         plot_bgcolor='white',
