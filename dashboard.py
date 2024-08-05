@@ -1387,7 +1387,7 @@ def load_and_clean_data(file_path):
     # Perform your data cleaning steps
     return data
 
-def plot_anemia_trends_non_pregnant():
+def plot_anemia_trends():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
     
@@ -1395,36 +1395,33 @@ def plot_anemia_trends_non_pregnant():
     indicator_code_non_preg = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
     filtered_data_non_preg = data[data['GHO_CODE'] == indicator_code_non_preg]
     
-    fig = px.line(
-        filtered_data_non_preg,
-        x='YEAR_DISPLAY',
-        y='Numeric',
-        title='Trend of Number of Non-Pregnant Women with Anemia Over Years',
-        labels={'YEAR_DISPLAY': 'Year', 'Numeric': 'Number of Women'},
-        markers=True
-    )
-    fig.update_layout(title_font_size=20, xaxis_title_font_size=16, yaxis_title_font_size=16)
-    return fig
-
-def plot_anemia_trends_pregnant():
-    file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
-    data = load_and_clean_data(file_path)
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_non_preg, marker='o', label='Non-Pregnant Women')
     
+    plt.xticks(ticks=filtered_data_non_preg['YEAR_DISPLAY'].unique(), 
+               labels=filtered_data_non_preg['YEAR_DISPLAY'].unique().astype(int), 
+               rotation=0, fontweight='bold')
+
+    plt.yticks(fontweight='bold')
+
+    plt.title('Trend of Number of Women with Anemia Over Years', fontweight='bold')
+    plt.xlabel('Year', fontweight='bold')
+    plt.ylabel('Number of Women', fontweight='bold')
+    plt.grid(False)
+    
+    sns.set(style="whitegrid")
+    sns.despine(left=True, bottom=True)
+
     # Pregnant women with anemia
     indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
     filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
     
-    fig = px.line(
-        filtered_data_preg,
-        x='YEAR_DISPLAY',
-        y='Numeric',
-        title='Trend of Number of Pregnant Women with Anemia Over Years',
-        labels={'YEAR_DISPLAY': 'Year', 'Numeric': 'Number of Women'},
-        markers=True
-    )
-    fig.update_layout(title_font_size=20, xaxis_title_font_size=16, yaxis_title_font_size=16)
-    return fig
-
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_preg, marker='o', label='Pregnant Women')
+    
+    plt.legend()
+    plt.tight_layout()
+    return plt
+    
 # %% [markdown]
 # Anemia Comparison
 
@@ -1441,31 +1438,26 @@ def plot_anemia_comparison():
     indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
     filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
 
-    fig = go.Figure()
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_non_preg, marker='o', label='Non-Pregnant Women')
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_preg, marker='o', label='Pregnant Women')
     
-    fig.add_trace(go.Scatter(
-        x=filtered_data_non_preg['YEAR_DISPLAY'],
-        y=filtered_data_non_preg['Numeric'],
-        mode='lines+markers',
-        name='Non-Pregnant Women'
-    ))
+    plt.xticks(ticks=filtered_data_non_preg['YEAR_DISPLAY'].unique(), 
+               labels=filtered_data_non_preg['YEAR_DISPLAY'].unique().astype(int), 
+               rotation=0, fontweight='bold')
+
+    plt.yticks(fontweight='bold')
+
+    plt.title('Comparison of Number of Non-Pregnant and Pregnant Women with Anemia Over Years', fontweight='bold')
+    plt.xlabel('Year', fontweight='bold')
+    plt.ylabel('Number of Women', fontweight='bold')
+    plt.grid(False)
     
-    fig.add_trace(go.Scatter(
-        x=filtered_data_preg['YEAR_DISPLAY'],
-        y=filtered_data_preg['Numeric'],
-        mode='lines+markers',
-        name='Pregnant Women'
-    ))
-    
-    fig.update_layout(
-        title='Comparison of Number of Non-Pregnant and Pregnant Women with Anemia Over Years',
-        xaxis_title='Year',
-        yaxis_title='Number of Women',
-        title_font_size=20,
-        xaxis_title_font_size=16,
-        yaxis_title_font_size=16
-    )
-    return fig
+    sns.set(style="whitegrid")
+    sns.despine(left=True, bottom=True)
+    plt.legend()
+    plt.tight_layout()
+    return plt
 
 # %% [markdown]
 # ## Streamlit
@@ -1518,47 +1510,42 @@ if page == "Introduction":
         """)
 
 
-elif page == "Graphs":
-    st.sidebar.title("Graphs")
-    option = st.sidebar.selectbox(
-        "Select a graph to display",
-        (
-            "Childbirth Attendance",
-            "Place of Childbirth",
-            "Private Hospital Deliveries",
-            "Cesarean Delivery Rate",
-            "Lebanese Births and Deaths",
-            "Lebanese and Non-Lebanese Births",
-            "Neonatal Mortality Rate",
-            "Maternal Mortality Rate",
-            "Anemia Trends",
-            "Comparison of Anemia in Non-Pregnant and Pregnant Women"
-        )
-    )
+st.sidebar.title("Graphs")
+option = st.sidebar.selectbox("Select a graph to display", (
+    "Childbirth Attendance",
+    "Place of Childbirth",
+    "Private Hospital Deliveries",
+    "Cesarean Delivery Rate",
+    "Lebanese Births and Deaths",
+    "Lebanese and Non-Lebanese Births",
+    "Neonatal Mortality Rate",
+    "Maternal Mortality Rate",
+    "Anemia Trends",
+    "Comparison of Anemia in Non-Pregnant and Pregnant Women"
+))
 
-    year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
+year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
 
-    if option == "Childbirth Attendance":
-        st.plotly_chart(childbirth_attendance_graph(), use_container_width=True)
-    elif option == "Place of Childbirth":
-        st.plotly_chart(place_of_birth_graph(), use_container_width=True)
-    elif option == "Private Hospital Deliveries":
-        st.plotly_chart(private_hospital_deliveries_graph(), use_container_width=True)
-    elif option == "Cesarean Delivery Rate":
-        st.plotly_chart(cesarean_delivery_rate_graph(year_range[0], year_range[1]), use_container_width=True)
-    elif option == "Lebanese Births and Deaths":
-        st.plotly_chart(births_and_deaths_graph(year_range[0], year_range[1]), use_container_width=True)
-    elif option == "Lebanese and Non-Lebanese Births":
-        st.plotly_chart(lebanese_non_lebanese_birth_graph(year_range[0], year_range[1]), use_container_width=True)
-    elif option == "Neonatal Mortality Rate":
-        st.plotly_chart(neonatal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
-    elif option == "Maternal Mortality Rate":
-        st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
-    elif option == "Anemia Trends":
-        st.plotly_chart(plot_anemia_trends_non_pregnant(), use_container_width=True)
-        st.plotly_chart(plot_anemia_trends_pregnant(), use_container_width=True)
-    elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
-        st.plotly_chart(plot_anemia_comparison(), use_container_width=True)
+if option == "Childbirth Attendance":
+    st.plotly_chart(childbirth_attendance_graph(), use_container_width=True)
+elif option == "Place of Childbirth":
+    st.plotly_chart(place_of_birth_graph(), use_container_width=True)
+elif option == "Private Hospital Deliveries":
+    st.plotly_chart(private_hospital_deliveries_graph(), use_container_width=True)
+elif option == "Cesarean Delivery Rate":
+    st.plotly_chart(cesarean_delivery_rate_graph(year_range[0], year_range[1]), use_container_width=True)
+elif option == "Lebanese Births and Deaths":
+    st.plotly_chart(births_and_deaths_graph(year_range[0], year_range[1]), use_container_width=True)
+elif option == "Lebanese and Non-Lebanese Births":
+    st.plotly_chart(lebanese_non_lebanese_birth_graph(year_range[0], year_range[1]), use_container_width=True)
+elif option == "Neonatal Mortality Rate":
+    st.plotly_chart(neonatal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
+elif option == "Maternal Mortality Rate":
+    st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
+elif option == "Anemia Trends":
+    st.pyplot(plot_anemia_trends())
+elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
+    st.pyplot(plot_anemia_comparison())
 
 
 elif page == "Recommendations and Conclusion":
