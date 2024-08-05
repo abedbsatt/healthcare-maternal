@@ -1394,7 +1394,7 @@ def plot_anemia_trends():
     
     plt.xticks(ticks=filtered_data_non_preg['YEAR_DISPLAY'].unique(), 
                labels=filtered_data_non_preg['YEAR_DISPLAY'].unique().astype(int), 
-               rotation=0, fontweight='bold')
+               rotation=45, fontweight='bold')  # Adjust rotation to 45 degrees
 
     plt.yticks(fontweight='bold')
 
@@ -1407,7 +1407,7 @@ def plot_anemia_trends():
     sns.despine(left=True, bottom=True)
     plt.tight_layout()
     return plt
-
+    
 def plot_anemia_trends_pregnant():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
