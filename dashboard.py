@@ -1558,7 +1558,7 @@ elif page == "Facts":
                 border-collapse: collapse;
                 margin: 25px 0;
                 font-size: 1.1em;
-                font-family: 'Arial', sans-serif;
+                font-family: 'Times New Roman', serif;
                 background-color: #f9f9f9;
                 color: #333;
                 border-radius: 5px 5px 0 0;
