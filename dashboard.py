@@ -1374,6 +1374,19 @@ def load_and_clean_data(file_path):
 # Anemia Trends
 
 # %%
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
+
+# Load and clean data function (assume this is already defined)
+def load_and_clean_data(file_path):
+    # Load and clean your data here
+    # For demonstration, I'm using a placeholder
+    data = pd.read_csv(file_path)
+    # Perform your data cleaning steps
+    return data
+
 def plot_anemia_trends_non_pregnant():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
@@ -1420,42 +1433,39 @@ def plot_anemia_comparison():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
     
-    indicator_code_1 = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
-    indicator_code_2 = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
+    # Non-pregnant women with anemia
+    indicator_code_non_preg = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
+    filtered_data_non_preg = data[data['GHO_CODE'] == indicator_code_non_preg]
 
-    filtered_data_1 = data[data['GHO_CODE'] == indicator_code_1]
-    filtered_data_2 = data[data['GHO_CODE'] == indicator_code_2]
+    # Pregnant women with anemia
+    indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
+    filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
 
-    comparison_data = pd.merge(filtered_data_1[['YEAR_DISPLAY', 'Numeric']], 
-                               filtered_data_2[['YEAR_DISPLAY', 'Numeric']], 
-                               on='YEAR_DISPLAY', 
-                               suffixes=('_non_pregnant', '_pregnant'))
+    fig = go.Figure()
     
-    fig, ax1 = plt.subplots(figsize=(12, 6))
-
-    sns.lineplot(x='YEAR_DISPLAY', y='Numeric_non_pregnant', data=comparison_data, marker='o', ax=ax1, color='blue', label='Non-Pregnant Women')
-    ax1.set_xlabel('Year', fontweight='bold')
-    ax1.set_ylabel('Number of Non-Pregnant Women', fontweight='bold', color='blue')
-    ax1.tick_params(axis='y', labelcolor='blue')
-    ax1.set_xticks(comparison_data['YEAR_DISPLAY'].unique())
-    ax1.set_xticklabels(comparison_data['YEAR_DISPLAY'].unique().astype(int), fontweight='bold')
-    ax1.grid(False)
-
-    ax2 = ax1.twinx()
-    sns.lineplot(x='YEAR_DISPLAY', y='Numeric_pregnant', data=comparison_data, marker='o', ax=ax2, color='orange', label='Pregnant Women')
-    ax2.set_ylabel('Number of Pregnant Women', fontweight='bold', color='orange')
-    ax2.tick_params(axis='y', labelcolor='orange')
-    ax2.grid(False)
-
-    plt.title('Comparison of Number of Women with Anemia Over Years', fontweight='bold')
-
-    # Combine legends from both plots
-    lines_1, labels_1 = ax1.get_legend_handles_labels()
-    lines_2, labels_2 = ax2.get_legend_handles_labels()
-    ax2.legend(lines_1 + lines_2, labels_1 + labels_2, loc='upper left', fontsize='large', title_fontsize='13')
-
-    fig.tight_layout()
-    return plt
+    fig.add_trace(go.Scatter(
+        x=filtered_data_non_preg['YEAR_DISPLAY'],
+        y=filtered_data_non_preg['Numeric'],
+        mode='lines+markers',
+        name='Non-Pregnant Women'
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=filtered_data_preg['YEAR_DISPLAY'],
+        y=filtered_data_preg['Numeric'],
+        mode='lines+markers',
+        name='Pregnant Women'
+    ))
+    
+    fig.update_layout(
+        title='Comparison of Number of Non-Pregnant and Pregnant Women with Anemia Over Years',
+        xaxis_title='Year',
+        yaxis_title='Number of Women',
+        title_font_size=20,
+        xaxis_title_font_size=16,
+        yaxis_title_font_size=16
+    )
+    return fig
 
 # %% [markdown]
 # ## Streamlit
@@ -1508,8 +1518,10 @@ if page == "Introduction":
         """)
     
 elif page == "Graphs":
-    st.sidebar.title("Graphs")
-    option = st.sidebar.selectbox("Select a graph to display", (
+st.sidebar.title("Graphs")
+option = st.sidebar.selectbox(
+    "Select a graph to display",
+    (
         "Childbirth Attendance",
         "Place of Childbirth",
         "Private Hospital Deliveries",
@@ -1520,9 +1532,10 @@ elif page == "Graphs":
         "Maternal Mortality Rate",
         "Anemia Trends",
         "Comparison of Anemia in Non-Pregnant and Pregnant Women"
-    ))
+    )
+)
 
-    year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
+year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
 
 if option == "Childbirth Attendance":
     st.plotly_chart(childbirth_attendance_graph(), use_container_width=True)
@@ -1541,10 +1554,11 @@ elif option == "Neonatal Mortality Rate":
 elif option == "Maternal Mortality Rate":
     st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
 elif option == "Anemia Trends":
-    st.pyplot(plot_anemia_trends_non_pregnant())
-    st.pyplot(plot_anemia_trends_pregnant())
+    st.plotly_chart(plot_anemia_trends_non_pregnant(), use_container_width=True)
+    st.plotly_chart(plot_anemia_trends_pregnant(), use_container_width=True)
 elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
-    st.pyplot(plot_anemia_comparison())
+    st.plotly_chart(plot_anemia_comparison(), use_container_width=True)
+
 
 elif page == "Recommendations and Conclusion":
     st.header("Recommendations and Conclusion")
