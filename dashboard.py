@@ -1473,7 +1473,7 @@ placeholder = st.empty()
 st.title("Lebanese Maternal and Reproductive Health Dashboard")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Introduction", "Graphs", "Recommendations", "Facts"])
+page = st.sidebar.radio("Go to", ["Introduction", "Facts", "Graphs", "Recommendations"])
 
 if page == "Introduction":
     st.header("Introduction")
