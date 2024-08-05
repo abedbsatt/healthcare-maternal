@@ -798,11 +798,11 @@ def place_of_birth_graph():
             'x':0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, color='white', family='Arial Black')
+            'font': dict(size=24, color='black', family='Arial Black')
         },
         showlegend=False,
-        plot_bgcolor='black',
-        paper_bgcolor='black',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
         height=600,
         margin=dict(t=100, l=250, r=100, b=50),
         xaxis=dict(
@@ -810,7 +810,7 @@ def place_of_birth_graph():
             showticklabels=False,
             showgrid=False,
             zeroline=False,
-            color='white'
+            color='black'
         ),
         yaxis=dict(
             tickfont=dict(size=14, color='white', family='Arial'),
@@ -865,7 +865,7 @@ def private_hospital_deliveries_graph():
             'x':0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=20, color='white', family='Arial Black')
+            'font': dict(size=20, color='black', family='Arial Black')
         },
         showlegend=False,
         annotations=[
@@ -873,13 +873,13 @@ def private_hospital_deliveries_graph():
                 text='Total Deliveries<br>35,883',
                 x=0.5,
                 y=0.5,
-                font=dict(size=14, color='white', family='Arial'),
+                font=dict(size=14, color='black', family='Arial'),
                 showarrow=False,
                 align='center'
             )
         ],
-        plot_bgcolor='black',
-        paper_bgcolor='black',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
     )
 
     return fig
@@ -946,16 +946,16 @@ def cesarean_delivery_rate_graph(start_year, end_year):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, family='Arial Black', color='white')
+            'font': dict(size=24, family='Arial Black', color='black')
         },
         hovermode="closest",
-        plot_bgcolor='black',
-        paper_bgcolor='black',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
         yaxis=dict(
             showgrid=False,
             zeroline=False,
             range=[0, 55],
-            tickfont=dict(size=12, color='white'),
+            tickfont=dict(size=12, color='black'),
             title=None
         ),
         xaxis=dict(
@@ -1035,11 +1035,11 @@ def births_and_deaths_graph(start_year, end_year):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, family='Arial Black', color='white')
+            'font': dict(size=24, family='Arial Black', color='black')
         },
         hovermode="closest",
-        plot_bgcolor='black',
-        paper_bgcolor='black',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
         yaxis=dict(
             showgrid=False,
             zeroline=False,
@@ -1128,15 +1128,15 @@ def lebanese_non_lebanese_birth_graph(start_year, end_year):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, family='Arial Black', color='white')
+            'font': dict(size=24, family='Arial Black', color='black')
         },
         hovermode="closest",
-        plot_bgcolor='black',
-        paper_bgcolor='black',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
         yaxis=dict(
             showgrid=False,
             zeroline=False,
-            tickfont=dict(size=12, color='white'),
+            tickfont=dict(size=12, color='black'),
             title=None
         ),
         xaxis=dict(
@@ -1221,16 +1221,16 @@ def neonatal_mr_graph(start_year, end_year):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, family='Arial Black', color='white')
+            'font': dict(size=24, family='Arial Black', color='black')
         },
         hovermode="closest",
-        plot_bgcolor='black',
-        paper_bgcolor='black',
-        font_color='white',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font_color='black',
         yaxis=dict(
             showgrid=False,
             zeroline=False,
-            tickfont=dict(size=12, color='white'),
+            tickfont=dict(size=12, color='black'),
             title=None
         ),
         xaxis=dict(
@@ -1315,16 +1315,16 @@ def maternal_mr_graph(start_year, end_year):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font': dict(size=24, family='Arial Black', color='white')
+            'font': dict(size=24, family='Arial Black', color='black')
         },
         hovermode="closest",
-        plot_bgcolor='black',
-        paper_bgcolor='black',
-        font_color='white',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font_color='black',
         yaxis=dict(
             showgrid=False,
             zeroline=False,
-            tickfont=dict(size=12, color='white'),
+            tickfont=dict(size=12, color='black'),
             title=None
         ),
         xaxis=dict(
