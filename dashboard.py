@@ -1367,7 +1367,7 @@ def load_and_clean_data(file_path):
 
 # %%
 def plot_anemia_trends():
-    file_path = "C:\\Users\\hossc\\Downloads\\maternal_and_reproductive_health_indicators_lbn (1).csv"
+    file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
     indicator_code = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
     filtered_data = data[data['GHO_CODE'] == indicator_code]
@@ -1395,7 +1395,7 @@ def plot_anemia_trends():
 
 # %%
 def plot_anemia_comparison():
-    file_path = "C:\\Users\\hossc\\Downloads\\maternal_and_reproductive_health_indicators_lbn (1).csv"
+    file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
     
     indicator_code_1 = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
@@ -1471,7 +1471,7 @@ page = st.sidebar.radio("Go to", ["Introduction", "Graphs", "Recommendations"])
 
 if page == "Introduction":
     st.header("Introduction")
-    st.image("C:\\Users\\hossc\\Downloads\\Downpic.cc-2296723531.jpg", use_column_width=True)
+    st.image("Downpic.cc-2296723531.jpg", use_column_width=True)
     st.write("""
         Welcome to the Lebanese Health Statistics Dashboard. This dashboard aims to provide insights into maternal and reproductive health in Lebanon. 
         Our project focuses on analyzing various health statistics related to childbirth, neonatal mortality, and maternal mortality. 
