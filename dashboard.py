@@ -1652,7 +1652,7 @@ elif page == "About":
     st.write("""
         This dashboard is developed to provide insights into maternal and reproductive health in Lebanon. Our goal is to support healthcare providers and policymakers in making informed decisions to improve health outcomes.
         
-        **Project Team:**
+        **Project Team Members:**
         - Houssem Chbichib
         - Abed Bsat
         - Adam Salha
