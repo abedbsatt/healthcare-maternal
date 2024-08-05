@@ -1445,6 +1445,9 @@ def plot_anemia_comparison():
 # ## Streamlit
 
 # %%
+
+st.set_page_config(layout="wide")
+
 st.markdown("""
     <style>
     .main {
