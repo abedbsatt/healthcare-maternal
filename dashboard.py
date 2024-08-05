@@ -1149,12 +1149,13 @@ def lebanese_non_lebanese_birth_graph(start_year, end_year):
         ),
         margin=dict(l=50, r=50, t=80, b=50),
         showlegend=False,
-        height=400,  # Adjust height
-        width=800   # Adjust width
+        autosize=False,
+        width=800,
+        height=400
     )
 
     return fig_births
-
+    
 # %% [markdown]
 # Neonatal
 
@@ -1336,8 +1337,9 @@ def maternal_mr_graph(start_year, end_year):
         ),
         margin=dict(l=50, r=50, t=80, b=50),
         showlegend=False,
-        height=400,  # Adjust height
-        width=800   # Adjust width
+        autosize=False,
+        width=800,
+        height=400
     )
 
     return fig_maternal_mr
