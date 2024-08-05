@@ -1486,6 +1486,8 @@ if page == "Introduction":
     """)
     st.write("""
         Our project is guided by the belief that informed decisions lead to better health outcomes. We invite you to explore the data visualizations, understand the trends, and join us in advocating for a healthier future for mothers and children in Lebanon. Together, we can make a significant impact by addressing the critical aspects of maternal and reproductive health through evidence-based practices and policy recommendations.
+        """)
+    
 elif page == "Graphs":
     st.sidebar.title("Graphs")
     option = st.sidebar.selectbox("Select a graph to display", (
