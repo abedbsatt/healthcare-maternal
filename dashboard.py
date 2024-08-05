@@ -1355,6 +1355,16 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
 # %%
+
+# %% [markdown]
+# Anemia Trends
+
+# %%
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
+
 def load_and_clean_data(file_path):
     data = pd.read_csv(file_path, skiprows=1)
     data.columns = ['GHO_CODE', 'GHO_DISPLAY', 'GHO_URL', 'YEAR_DISPLAY', 'STARTYEAR', 
@@ -1370,34 +1380,20 @@ def load_and_clean_data(file_path):
     data.dropna(subset=['YEAR_DISPLAY', 'Numeric'], inplace=True)
     return data
 
-# %% [markdown]
-# Anemia Trends
-
-# %%
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-import streamlit as st
-
-# Load and clean data function (assume this is already defined)
-def load_and_clean_data(file_path):
-    # Load and clean your data here
-    # For demonstration, I'm using a placeholder
-    data = pd.read_csv(file_path)
-    # Perform your data cleaning steps
-    return data
 
 def plot_anemia_trends():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
-    indicator_code = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
-    filtered_data = data[data['GHO_CODE'] == indicator_code]
+    
+    # Non-pregnant women with anemia
+    indicator_code_non_preg = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
+    filtered_data_non_preg = data[data['GHO_CODE'] == indicator_code_non_preg]
     
     plt.figure(figsize=(12, 6))
-    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data, marker='o')
-
-    plt.xticks(ticks=filtered_data['YEAR_DISPLAY'].unique(), 
-               labels=filtered_data['YEAR_DISPLAY'].unique().astype(int), 
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_non_preg, marker='o', label='Non-Pregnant Women')
+    
+    plt.xticks(ticks=filtered_data_non_preg['YEAR_DISPLAY'].unique(), 
+               labels=filtered_data_non_preg['YEAR_DISPLAY'].unique().astype(int), 
                rotation=0, fontweight='bold')
 
     plt.yticks(fontweight='bold')
@@ -1406,11 +1402,39 @@ def plot_anemia_trends():
     plt.xlabel('Year', fontweight='bold')
     plt.ylabel('Number of Women', fontweight='bold')
     plt.grid(False)
-
+    
     sns.set(style="whitegrid")
     sns.despine(left=True, bottom=True)
     plt.tight_layout()
     return plt
+
+def plot_anemia_trends_pregnant():
+    file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
+    data = load_and_clean_data(file_path)
+    
+    # Pregnant women with anemia
+    indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
+    filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
+    
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_preg, marker='o', label='Pregnant Women')
+    
+    plt.xticks(ticks=filtered_data_preg['YEAR_DISPLAY'].unique(), 
+               labels=filtered_data_preg['YEAR_DISPLAY'].unique().astype(int), 
+               rotation=0, fontweight='bold')
+
+    plt.yticks(fontweight='bold')
+
+    plt.title('Trend of Number of Pregnant Women with Anemia Over Years', fontweight='bold')
+    plt.xlabel('Year', fontweight='bold')
+    plt.ylabel('Number of Women', fontweight='bold')
+    plt.grid(False)
+    
+    sns.set(style="whitegrid")
+    sns.despine(left=True, bottom=True)
+    plt.tight_layout()
+    return plt
+
     
 # %% [markdown]
 # Anemia Comparison
@@ -1419,26 +1443,41 @@ def plot_anemia_trends():
 def plot_anemia_comparison():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
-    indicator_code = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
-    filtered_data = data[data['GHO_CODE'] == indicator_code]
     
-    plt.figure(figsize=(12, 6))
-    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data, marker='o')
+    indicator_code_non_preg = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
+    indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
 
-    plt.xticks(ticks=filtered_data['YEAR_DISPLAY'].unique(), 
-               labels=filtered_data['YEAR_DISPLAY'].unique().astype(int), 
-               rotation=0, fontweight='bold')
+    filtered_data_non_preg = data[data['GHO_CODE'] == indicator_code_non_preg]
+    filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
 
-    plt.yticks(fontweight='bold')
+    comparison_data = pd.merge(filtered_data_non_preg[['YEAR_DISPLAY', 'Numeric']], 
+                               filtered_data_preg[['YEAR_DISPLAY', 'Numeric']], 
+                               on='YEAR_DISPLAY', 
+                               suffixes=('_non_pregnant', '_pregnant'))
+    
+    fig, ax1 = plt.subplots(figsize=(12, 6))
 
-    plt.title('Trend of Number of Pregnant Women (Aged 15-49 Years) with Anemia Over Years', fontweight='bold')
-    plt.xlabel('Year', fontweight='bold')
-    plt.ylabel('Number of Women', fontweight='bold')
-    plt.grid(False)
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric_non_pregnant', data=comparison_data, marker='o', ax=ax1, color='blue', label='Non-Pregnant Women')
+    ax1.set_xlabel('Year', fontweight='bold')
+    ax1.set_ylabel('Number of Non-Pregnant Women', fontweight='bold', color='blue')
+    ax1.tick_params(axis='y', labelcolor='blue')
+    ax1.set_xticks(comparison_data['YEAR_DISPLAY'].unique())
+    ax1.set_xticklabels(comparison_data['YEAR_DISPLAY'].unique().astype(int), fontweight='bold')
+    ax1.grid(False)
 
-    sns.set(style="whitegrid")
-    sns.despine(left=True, bottom=True)
-    plt.tight_layout()
+    ax2 = ax1.twinx()
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric_pregnant', data=comparison_data, marker='o', ax=ax2, color='orange', label='Pregnant Women')
+    ax2.set_ylabel('Number of Pregnant Women', fontweight='bold', color='orange')
+    ax2.tick_params(axis='y', labelcolor='orange')
+    ax2.grid(False)
+
+    plt.title('Comparison of Number of Women with Anemia Over Years', fontweight='bold')
+
+    lines_1, labels_1 = ax1.get_legend_handles_labels()
+    lines_2, labels_2 = ax2.get_legend_handles_labels()
+    ax2.legend(lines_1 + lines_2, labels_1 + labels_2, loc='upper left', fontsize='large', title_fontsize='13')
+
+    fig.tight_layout()
     return plt
 
 # %% [markdown]
@@ -1525,9 +1564,9 @@ elif option == "Maternal Mortality Rate":
     st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
 elif option == "Anemia Trends":
     st.pyplot(plot_anemia_trends())
+    st.pyplot(plot_anemia_trends_pregnant())
 elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
     st.pyplot(plot_anemia_comparison())
-
 
 elif page == "Recommendations and Conclusion":
     st.header("Recommendations and Conclusion")
