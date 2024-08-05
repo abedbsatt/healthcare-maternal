@@ -1479,14 +1479,13 @@ if page == "Introduction":
     st.header("Introduction")
     st.image("Downpic.cc-2296723531.jpg", use_column_width=True)
     st.write("""
-        Welcome to the Lebanese Health Statistics Dashboard. This dashboard aims to provide insights into maternal and reproductive health in Lebanon. 
-        Our project focuses on analyzing various health statistics related to childbirth, neonatal mortality, and maternal mortality. 
-        We believe that understanding these statistics can help in improving healthcare services and outcomes for mothers and children in Lebanon.
+        Welcome to the **Lebanese Maternal and Reproductive Health Dashboard**. This interactive platform is dedicated to providing valuable insights into the maternal and reproductive health landscape in Lebanon. Through a comprehensive analysis of key health indicators, this dashboard aims to enhance our understanding of maternal and neonatal health trends, identify areas for improvement, and support data-driven decision-making for healthcare providers and policymakers.
     """)
     st.write("""
-        The importance of maternal and reproductive health cannot be overstated. It is crucial for the well-being of mothers and their children. 
-        By analyzing data and identifying trends, we can make informed decisions and recommendations to enhance healthcare services. 
-        This project was pursued to shed light on these vital statistics and to provide actionable insights for policymakers and healthcare providers.
+        The well-being of mothers and their children is paramount to the overall health of any society. In Lebanon, maternal and reproductive health services face unique challenges that require continuous monitoring and improvement. By exploring various statistics related to childbirth, neonatal mortality, and maternal mortality, this dashboard serves as a crucial tool for highlighting successes, uncovering gaps, and formulating targeted interventions to improve health outcomes.
+    """)
+    st.write("""
+        Our project is guided by the belief that informed decisions lead to better health outcomes. We invite you to explore the data visualizations, understand the trends, and join us in advocating for a healthier future for mothers and children in Lebanon. Together, we can make a significant impact by addressing the critical aspects of maternal and reproductive health through evidence-based practices and policy recommendations.
     """)
 
 elif page == "Graphs":
