@@ -1394,7 +1394,7 @@ def plot_anemia_trends():
     
     plt.xticks(ticks=filtered_data_non_preg['YEAR_DISPLAY'].unique(), 
                labels=filtered_data_non_preg['YEAR_DISPLAY'].unique().astype(int), 
-               rotation=45, fontweight='bold')  # Adjust rotation to 45 degrees
+               rotation=0, fontweight='bold')  
 
     plt.yticks(fontweight='bold')
 
