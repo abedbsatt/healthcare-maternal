@@ -1550,17 +1550,95 @@ elif page == "Recommendations":
 
 elif page == "Facts":
     st.header("Facts about Maternal and Reproductive Health in Lebanon")
-    st.table([
-        ["**Aspect**", "**Fact**"],
-        ["Maternal Mortality Rate", "29 deaths per 100,000 live births (2020)"],
-        ["Skilled Birth Attendance", "Over 98% of births attended by skilled health personnel"],
-        ["Antenatal Care Coverage", "89% of women receive at least four antenatal care visits"],
-        ["Postnatal Care Coverage", "85% of women receive postnatal care within two days of delivery"],
-        ["Contraceptive Prevalence Rate", "Approximately 55% of women use modern contraceptive methods"],
-        ["Adolescent Birth Rate", "22 births per 1,000 women aged 15-19"],
-        ["Total Fertility Rate", "2.1 children per woman"],
-        ["C-Section Rate", "Around 45%, higher than the recommended rate of 10-15%"],
-        ["Maternal Health Services", "Widely available in urban areas; limited access in rural and remote areas"],
-        ["Government Initiatives", "Various programs to improve maternal health, including subsidies and education"],
-        ["Challenges", "Economic instability, refugee influx, and healthcare system strain"]
-    ])
+    
+    st.markdown("""
+        <style>
+            .fact-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 25px 0;
+                font-size: 1.1em;
+                font-family: 'Arial', sans-serif;
+                background-color: #f2f2f2;
+                border-radius: 5px 5px 0 0;
+                overflow: hidden;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            }
+            .fact-table thead tr {
+                background-color: #009879;
+                color: #ffffff;
+                text-align: left;
+                font-weight: bold;
+            }
+            .fact-table th,
+            .fact-table td {
+                padding: 12px 15px;
+            }
+            .fact-table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+            .fact-table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+            .fact-table tbody tr:last-of-type {
+                border-bottom: 2px solid #009879;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <table class="fact-table">
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Fact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maternal Mortality Rate</td>
+                    <td>29 deaths per 100,000 live births (2020)</td>
+                </tr>
+                <tr>
+                    <td>Skilled Birth Attendance</td>
+                    <td>Over 98% of births attended by skilled health personnel</td>
+                </tr>
+                <tr>
+                    <td>Antenatal Care Coverage</td>
+                    <td>89% of women receive at least four antenatal care visits</td>
+                </tr>
+                <tr>
+                    <td>Postnatal Care Coverage</td>
+                    <td>85% of women receive postnatal care within two days of delivery</td>
+                </tr>
+                <tr>
+                    <td>Contraceptive Prevalence Rate</td>
+                    <td>Approximately 55% of women use modern contraceptive methods</td>
+                </tr>
+                <tr>
+                    <td>Adolescent Birth Rate</td>
+                    <td>22 births per 1,000 women aged 15-19</td>
+                </tr>
+                <tr>
+                    <td>Total Fertility Rate</td>
+                    <td>2.1 children per woman</td>
+                </tr>
+                <tr>
+                    <td>C-Section Rate</td>
+                    <td>Around 45%, higher than the recommended rate of 10-15%</td>
+                </tr>
+                <tr>
+                    <td>Maternal Health Services</td>
+                    <td>Widely available in urban areas; limited access in rural and remote areas</td>
+                </tr>
+                <tr>
+                    <td>Government Initiatives</td>
+                    <td>Various programs to improve maternal health, including subsidies and education</td>
+                </tr>
+                <tr>
+                    <td>Challenges</td>
+                    <td>Economic instability, refugee influx, and healthcare system strain</td>
+                </tr>
+            </tbody>
+        </table>
+    """, unsafe_allow_html=True)
