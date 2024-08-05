@@ -1516,48 +1516,49 @@ if page == "Introduction":
     st.write("""
         Our project is guided by the belief that informed decisions lead to better health outcomes. We invite you to explore the data visualizations, understand the trends, and join us in advocating for a healthier future for mothers and children in Lebanon. Together, we can make a significant impact by addressing the critical aspects of maternal and reproductive health through evidence-based practices and policy recommendations.
         """)
-    
+
+
 elif page == "Graphs":
-st.sidebar.title("Graphs")
-option = st.sidebar.selectbox(
-    "Select a graph to display",
-    (
-        "Childbirth Attendance",
-        "Place of Childbirth",
-        "Private Hospital Deliveries",
-        "Cesarean Delivery Rate",
-        "Lebanese Births and Deaths",
-        "Lebanese and Non-Lebanese Births",
-        "Neonatal Mortality Rate",
-        "Maternal Mortality Rate",
-        "Anemia Trends",
-        "Comparison of Anemia in Non-Pregnant and Pregnant Women"
+    st.sidebar.title("Graphs")
+    option = st.sidebar.selectbox(
+        "Select a graph to display",
+        (
+            "Childbirth Attendance",
+            "Place of Childbirth",
+            "Private Hospital Deliveries",
+            "Cesarean Delivery Rate",
+            "Lebanese Births and Deaths",
+            "Lebanese and Non-Lebanese Births",
+            "Neonatal Mortality Rate",
+            "Maternal Mortality Rate",
+            "Anemia Trends",
+            "Comparison of Anemia in Non-Pregnant and Pregnant Women"
+        )
     )
-)
 
-year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
+    year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
 
-if option == "Childbirth Attendance":
-    st.plotly_chart(childbirth_attendance_graph(), use_container_width=True)
-elif option == "Place of Childbirth":
-    st.plotly_chart(place_of_birth_graph(), use_container_width=True)
-elif option == "Private Hospital Deliveries":
-    st.plotly_chart(private_hospital_deliveries_graph(), use_container_width=True)
-elif option == "Cesarean Delivery Rate":
-    st.plotly_chart(cesarean_delivery_rate_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Lebanese Births and Deaths":
-    st.plotly_chart(births_and_deaths_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Lebanese and Non-Lebanese Births":
-    st.plotly_chart(lebanese_non_lebanese_birth_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Neonatal Mortality Rate":
-    st.plotly_chart(neonatal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Maternal Mortality Rate":
-    st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Anemia Trends":
-    st.plotly_chart(plot_anemia_trends_non_pregnant(), use_container_width=True)
-    st.plotly_chart(plot_anemia_trends_pregnant(), use_container_width=True)
-elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
-    st.plotly_chart(plot_anemia_comparison(), use_container_width=True)
+    if option == "Childbirth Attendance":
+        st.plotly_chart(childbirth_attendance_graph(), use_container_width=True)
+    elif option == "Place of Childbirth":
+        st.plotly_chart(place_of_birth_graph(), use_container_width=True)
+    elif option == "Private Hospital Deliveries":
+        st.plotly_chart(private_hospital_deliveries_graph(), use_container_width=True)
+    elif option == "Cesarean Delivery Rate":
+        st.plotly_chart(cesarean_delivery_rate_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Lebanese Births and Deaths":
+        st.plotly_chart(births_and_deaths_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Lebanese and Non-Lebanese Births":
+        st.plotly_chart(lebanese_non_lebanese_birth_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Neonatal Mortality Rate":
+        st.plotly_chart(neonatal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Maternal Mortality Rate":
+        st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Anemia Trends":
+        st.plotly_chart(plot_anemia_trends_non_pregnant(), use_container_width=True)
+        st.plotly_chart(plot_anemia_trends_pregnant(), use_container_width=True)
+    elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
+        st.plotly_chart(plot_anemia_comparison(), use_container_width=True)
 
 
 elif page == "Recommendations and Conclusion":
