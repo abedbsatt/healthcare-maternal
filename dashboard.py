@@ -2,6 +2,7 @@
 #####CHILDBIRTH GRAPH
 
 import plotly.graph_objects as go
+from anaemia import plot_anemia_trends, plot_anemia_comparison
 
 # Data
 indicators = ['Childbirth by<br>skilled attendant', 'Childbirth by<br>unskilled attendant']
