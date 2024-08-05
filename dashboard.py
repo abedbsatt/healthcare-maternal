@@ -1484,9 +1484,9 @@ def plot_anemia_comparison():
 # ## Streamlit
 
 # %%
-
 st.set_page_config(layout="wide")
 
+# Apply custom CSS styling
 st.markdown("""
     <style>
     .main {
@@ -1508,15 +1508,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# %%
-placeholder = st.empty()
-
-# %%
-st.title("Lebanese Maternal and Reproductive Health Dashboard")
-
+# Sidebar navigation
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["Introduction", "About", "Facts", "Graphs", "Recommendations and Conclusion", "Limitations"])
 
+# Main content
 if page == "Introduction":
     st.header("Introduction")
     st.image("Downpic.cc-2296723531.jpg", use_column_width=True)
@@ -1528,97 +1524,21 @@ if page == "Introduction":
     """)
     st.write("""
         Our project is guided by the belief that informed decisions lead to better health outcomes. We invite you to explore the data visualizations, understand the trends, and join us in advocating for a healthier future for mothers and children in Lebanon. Together, we can make a significant impact by addressing the critical aspects of maternal and reproductive health through evidence-based practices and policy recommendations.
-        """)
-
-st.sidebar.title("Graphs")
-option = st.sidebar.selectbox("Select a graph to display", (
-    "Childbirth Attendance",
-    "Place of Childbirth",
-    "Private Hospital Deliveries",
-    "Cesarean Delivery Rate",
-    "Lebanese Births and Deaths",
-    "Lebanese and Non-Lebanese Births",
-    "Neonatal Mortality Rate",
-    "Maternal Mortality Rate",
-    "Anemia Trends",
-    "Comparison of Anemia in Non-Pregnant and Pregnant Women"
-))
-
-year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
-
-if option == "Childbirth Attendance":
-    st.plotly_chart(childbirth_attendance_graph(), use_container_width=True)
-elif option == "Place of Childbirth":
-    st.plotly_chart(place_of_birth_graph(), use_container_width=True)
-elif option == "Private Hospital Deliveries":
-    st.plotly_chart(private_hospital_deliveries_graph(), use_container_width=True)
-elif option == "Cesarean Delivery Rate":
-    st.plotly_chart(cesarean_delivery_rate_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Lebanese Births and Deaths":
-    st.plotly_chart(births_and_deaths_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Lebanese and Non-Lebanese Births":
-    st.plotly_chart(lebanese_non_lebanese_birth_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Neonatal Mortality Rate":
-    st.plotly_chart(neonatal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Maternal Mortality Rate":
-    st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
-elif option == "Anemia Trends":
-    st.pyplot(plot_anemia_trends())
-    st.pyplot(plot_anemia_trends_pregnant())
-elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
-    st.pyplot(plot_anemia_comparison())
-
-elif page == "Recommendations and Conclusion":
-    st.header("Recommendations and Conclusion")
-    
-    st.subheader("Recommendations")
-    st.write("""
-    Based on a comprehensive analysis of maternal and reproductive health statistics in Lebanon, we offer the following detailed recommendations:
-    """)
-    
-    st.write("**1. Increase Access to Skilled Birth Attendants:**")
-    st.write("""
-    - **Training Programs:** Implement extensive training programs for midwives and birth attendants, ensuring they are equipped with the latest skills and knowledge.
-    - **Incentivize Placement in Rural Areas:** Provide incentives such as housing allowances, bonuses, and career development opportunities to encourage skilled professionals to work in underserved rural areas.
-    - **Mobile Clinics:** Deploy mobile clinics staffed with skilled birth attendants to reach remote and rural communities where access to healthcare facilities is limited.
-    """)
-    
-    st.write("**2. Improve Healthcare Facilities:**")
-    st.write("""
-    - **Infrastructure Investment:** Allocate funding to upgrade existing healthcare facilities, focusing on maternal and neonatal units. This includes improving sanitation, ensuring the availability of essential medical equipment, and maintaining a steady supply of necessary medications.
-    - **Public-Private Partnerships:** Encourage partnerships between public healthcare providers and private entities to improve service delivery and facility management.
-    - **Community Health Centers:** Establish more community health centers in rural and underserved areas, ensuring they are well-equipped and staffed to handle maternal and neonatal emergencies.
-    """)
-    
-    st.write("**3. Promote Cesarean Delivery Awareness:**")
-    st.write("""
-    - **Educational Campaigns:** Launch nationwide educational campaigns to inform expecting mothers about the benefits and risks associated with cesarean deliveries. Use multimedia platforms, including social media, to reach a broader audience.
-    - **Counseling Services:** Provide counseling services in prenatal clinics to discuss delivery options with expecting mothers, helping them make informed decisions based on their health and preferences.
-    - **Professional Development:** Conduct workshops for healthcare providers to update them on the latest best practices and guidelines for cesarean deliveries, ensuring they can offer the best advice and care.
-    """)
-    
-    st.write("**4. Reduce Neonatal Mortality:**")
-    st.write("""
-    - **Targeted Interventions:** Identify high-risk groups and regions with elevated neonatal mortality rates. Implement targeted interventions such as specialized neonatal care units and training for healthcare providers in these areas.
-    - **Early Detection Programs:** Develop and implement programs for early detection and management of neonatal complications, such as congenital anomalies and infections, to reduce mortality rates.
-    - **Parental Education:** Educate parents on neonatal care, emphasizing the importance of timely vaccinations, proper nutrition, and hygiene practices.
-    """)
-    
-    st.write("**5. Address Maternal Mortality:**")
-    st.write("""
-    - **Comprehensive Maternal Health Services:** Expand access to comprehensive maternal health services, including prenatal, intrapartum, and postpartum care, with a focus on non-Lebanese populations who often face barriers to healthcare access.
-    - **Emergency Obstetric Care:** Ensure that all healthcare facilities are equipped to handle obstetric emergencies, with clear protocols and rapid response teams in place.
-    - **Health Insurance Coverage:** Advocate for policies that provide health insurance coverage to all women, including refugees and migrant workers, to ensure they can access maternal health services without financial burden.
     """)
 
-    st.subheader("Conclusion")
+elif page == "About":
+    st.header("About")
     st.write("""
-    Our analysis highlights significant areas for improvement in maternal and reproductive health in Lebanon. By implementing these detailed strategies, we can enhance healthcare services, reduce mortality rates, and ensure a healthier future for mothers and children. The focus on skilled birth attendants, improved healthcare facilities, cesarean delivery awareness, neonatal mortality reduction, and maternal mortality addressing are crucial steps toward achieving better health outcomes. Together, we can make a substantial impact and drive positive change in the health and well-being of mothers and their children across Lebanon.
+        This dashboard is developed to provide insights into maternal and reproductive health in Lebanon. Our goal is to support healthcare providers and policymakers in making informed decisions to improve health outcomes.
+        
+        **Project Team Members:**
+        - Houssem Chbichib
+        - Abed Bsat
+        - Adam Salha
     """)
-    
+
 elif page == "Facts":
     st.header("Facts about Maternal and Reproductive Health in Lebanon")
-    
     st.markdown("""
         <style>
             .fact-table {
@@ -1714,16 +1634,92 @@ elif page == "Facts":
             </tbody>
         </table>
     """, unsafe_allow_html=True)
+
+elif page == "Graphs":
+    st.sidebar.title("Graphs")
+    option = st.sidebar.selectbox("Select a graph to display", (
+        "Childbirth Attendance",
+        "Place of Childbirth",
+        "Private Hospital Deliveries",
+        "Cesarean Delivery Rate",
+        "Lebanese Births and Deaths",
+        "Lebanese and Non-Lebanese Births",
+        "Neonatal Mortality Rate",
+        "Maternal Mortality Rate",
+        "Anemia Trends",
+        "Comparison of Anemia in Non-Pregnant and Pregnant Women"
+    ))
+
+    year_range = st.sidebar.slider("Select year range", min_value=2010, max_value=2022, value=(2010, 2022))
+
+    if option == "Childbirth Attendance":
+        st.plotly_chart(childbirth_attendance_graph(), use_container_width=True)
+    elif option == "Place of Childbirth":
+        st.plotly_chart(place_of_birth_graph(), use_container_width=True)
+    elif option == "Private Hospital Deliveries":
+        st.plotly_chart(private_hospital_deliveries_graph(), use_container_width=True)
+    elif option == "Cesarean Delivery Rate":
+        st.plotly_chart(cesarean_delivery_rate_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Lebanese Births and Deaths":
+        st.plotly_chart(births_and_deaths_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Lebanese and Non-Lebanese Births":
+        st.plotly_chart(lebanese_non_lebanese_birth_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Neonatal Mortality Rate":
+        st.plotly_chart(neonatal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Maternal Mortality Rate":
+        st.plotly_chart(maternal_mr_graph(year_range[0], year_range[1]), use_container_width=True)
+    elif option == "Anemia Trends":
+        st.pyplot(plot_anemia_trends())
+        st.pyplot(plot_anemia_trends_pregnant())
+    elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
+        st.pyplot(plot_anemia_comparison())
+
+elif page == "Recommendations and Conclusion":
+    st.header("Recommendations and Conclusion")
     
-elif page == "About":
-    st.header("About")
+    st.subheader("Recommendations")
     st.write("""
-        This dashboard is developed to provide insights into maternal and reproductive health in Lebanon. Our goal is to support healthcare providers and policymakers in making informed decisions to improve health outcomes.
-        
-        **Project Team Members:**
-        - Houssem Chbichib
-        - Abed Bsat
-        - Adam Salha
+    Based on a comprehensive analysis of maternal and reproductive health statistics in Lebanon, we offer the following detailed recommendations:
+    """)
+    
+    st.write("**1. Increase Access to Skilled Birth Attendants:**")
+    st.write("""
+    - **Training Programs:** Implement extensive training programs for midwives and birth attendants, ensuring they are equipped with the latest skills and knowledge.
+    - **Incentivize Placement in Rural Areas:** Provide incentives such as housing allowances, bonuses, and career development opportunities to encourage skilled professionals to work in underserved rural areas.
+    - **Mobile Clinics:** Deploy mobile clinics staffed with skilled birth attendants to reach remote and rural communities where access to healthcare facilities is limited.
+    """)
+    
+    st.write("**2. Improve Healthcare Facilities:**")
+    st.write("""
+    - **Infrastructure Investment:** Allocate funding to upgrade existing healthcare facilities, focusing on maternal and neonatal units. This includes improving sanitation, ensuring the availability of essential medical equipment, and maintaining a steady supply of necessary medications.
+    - **Public-Private Partnerships:** Encourage partnerships between public healthcare providers and private entities to improve service delivery and facility management.
+    - **Community Health Centers:** Establish more community health centers in rural and underserved areas, ensuring they are well-equipped and staffed to handle maternal and neonatal emergencies.
+    """)
+    
+    st.write("**3. Promote Cesarean Delivery Awareness:**")
+    st.write("""
+    - **Educational Campaigns:** Launch nationwide educational campaigns to inform expecting mothers about the benefits and risks associated with cesarean deliveries. Use multimedia platforms, including social media, to reach a broader audience.
+    - **Counseling Services:** Provide counseling services in prenatal clinics to discuss delivery options with expecting mothers, helping them make informed decisions based on their health and preferences.
+    - **Professional Development:** Conduct workshops for healthcare providers to update them on the latest best practices and guidelines for cesarean deliveries, ensuring they can offer the best advice and care.
+    """)
+    
+    st.write("**4. Reduce Neonatal Mortality:**")
+    st.write("""
+    - **Targeted Interventions:** Identify high-risk groups and regions with elevated neonatal mortality rates. Implement targeted interventions such as specialized neonatal care units and training for healthcare providers in these areas.
+    - **Early Detection Programs:** Develop and implement programs for early detection and management of neonatal complications, such as congenital anomalies and infections, to reduce mortality rates.
+    - **Parental Education:** Educate parents on neonatal care, emphasizing the importance of timely vaccinations, proper nutrition, and hygiene practices.
+    """)
+    
+    st.write("**5. Address Maternal Mortality:**")
+    st.write("""
+    - **Comprehensive Maternal Health Services:** Expand access to comprehensive maternal health services, including prenatal, intrapartum, and postpartum care, with a focus on non-Lebanese populations who often face barriers to healthcare access.
+    - **Emergency Obstetric Care:** Ensure that all healthcare facilities are equipped to handle obstetric emergencies, with clear protocols and rapid response teams in place.
+    - **Health Insurance Coverage:** Advocate for policies that provide health insurance coverage to all women, including refugees and migrant workers, to ensure they can access maternal health services without financial burden.
+    """)
+
+    st.subheader("Conclusion")
+    st.write("""
+    Our analysis highlights significant areas for improvement in maternal and reproductive health in Lebanon. By implementing these detailed strategies, we can enhance healthcare services, reduce mortality rates, and ensure a healthier future for mothers and children. The focus on skilled birth attendants, improved healthcare facilities, cesarean delivery awareness, neonatal mortality reduction, and maternal mortality addressing are crucial steps toward achieving better health outcomes. Together, we can make a substantial impact and drive positive change in the health and well-being of mothers and their children across Lebanon.
     """)
 
 elif page == "Limitations":
