@@ -1143,14 +1143,14 @@ def lebanese_non_lebanese_birth_graph(start_year, end_year):
             tickmode='linear',
             dtick=1,
             tickangle=0,
-            tickfont=dict(size=12, color='white'),
+            tickfont=dict(size=12, color='black'),
             showgrid=False,
             range=[start_year - 0.5, end_year + 0.5]
         ),
         margin=dict(l=50, r=50, t=80, b=50),
         showlegend=False,
-        height=600,
-        width=1000
+        height=400,  # Adjust height
+        width=800   # Adjust width
     )
 
     return fig_births
@@ -1320,7 +1320,6 @@ def maternal_mr_graph(start_year, end_year):
         hovermode="closest",
         plot_bgcolor='white',
         paper_bgcolor='white',
-        font_color='black',
         yaxis=dict(
             showgrid=False,
             zeroline=False,
@@ -1331,14 +1330,14 @@ def maternal_mr_graph(start_year, end_year):
             tickmode='linear',
             dtick=1,
             tickangle=0,
-            tickfont=dict(size=12, color='white'),
+            tickfont=dict(size=12, color='black'),
             showgrid=False,
             range=[start_year - 0.5, end_year + 0.5]
         ),
         margin=dict(l=50, r=50, t=80, b=50),
         showlegend=False,
-        height=600,
-        width=1000
+        height=400,  # Adjust height
+        width=800   # Adjust width
     )
 
     return fig_maternal_mr
