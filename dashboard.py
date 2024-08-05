@@ -1473,7 +1473,7 @@ placeholder = st.empty()
 st.title("Lebanese Maternal and Reproductive Health Dashboard")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Introduction", "Graphs", "Recommendations"])
+page = st.sidebar.radio("Go to", ["Introduction", "Graphs", "Recommendations", "Facts"])
 
 if page == "Introduction":
     st.header("Introduction")
@@ -1548,4 +1548,19 @@ elif page == "Recommendations":
         By implementing the recommended strategies, we can enhance healthcare services, reduce mortality rates, and ensure a healthier future for mothers and children.
     """)
 
-
+elif page == "Facts":
+    st.header("Facts about Maternal and Reproductive Health in Lebanon")
+    st.table([
+        ["**Aspect**", "**Fact**"],
+        ["Maternal Mortality Rate", "29 deaths per 100,000 live births (2020)"],
+        ["Skilled Birth Attendance", "Over 98% of births attended by skilled health personnel"],
+        ["Antenatal Care Coverage", "89% of women receive at least four antenatal care visits"],
+        ["Postnatal Care Coverage", "85% of women receive postnatal care within two days of delivery"],
+        ["Contraceptive Prevalence Rate", "Approximately 55% of women use modern contraceptive methods"],
+        ["Adolescent Birth Rate", "22 births per 1,000 women aged 15-19"],
+        ["Total Fertility Rate", "2.1 children per woman"],
+        ["C-Section Rate", "Around 45%, higher than the recommended rate of 10-15%"],
+        ["Maternal Health Services", "Widely available in urban areas; limited access in rural and remote areas"],
+        ["Government Initiatives", "Various programs to improve maternal health, including subsidies and education"],
+        ["Challenges", "Economic instability, refugee influx, and healthcare system strain"]
+    ])
