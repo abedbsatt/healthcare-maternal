@@ -1473,7 +1473,7 @@ placeholder = st.empty()
 st.title("Lebanese Maternal and Reproductive Health Dashboard")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Introduction", "About", "Facts", "Graphs", "Recommendations and Conclusion"])
+page = st.sidebar.radio("Go to", ["Introduction", "About", "Facts", "Graphs", "Recommendations and Conclusion", "Limitations"])
 
 if page == "Introduction":
     st.header("Introduction")
@@ -1682,4 +1682,46 @@ elif page == "About":
         - Houssem Chbichib
         - Abed Bsat
         - Adam Salha
+    """)
+
+elif page == "Limitations":
+    st.header("Limitations")
+    
+    st.write("""
+    While this dashboard provides valuable insights into maternal and reproductive health in Lebanon, it is important to acknowledge certain limitations that may affect the interpretation and generalizability of the findings:
+    """)
+    
+    st.write("**1. Data Availability and Quality:**")
+    st.write("""
+    - **Incomplete Data:** Some regions or populations may have incomplete or missing data, which can affect the accuracy and comprehensiveness of the analysis.
+    - **Data Collection Methods:** Variations in data collection methods and reporting standards across different sources can lead to inconsistencies and potential biases in the data.
+    - **Timeliness:** The data used in this dashboard may not reflect the most current state of maternal and reproductive health due to delays in data reporting and updates.
+    """)
+    
+    st.write("**2. Generalizability:**")
+    st.write("""
+    - **Population Differences:** The findings and recommendations may not be fully generalizable to all regions or populations within Lebanon, particularly in areas with significant cultural, socioeconomic, or healthcare access differences.
+    - **Non-Lebanese Populations:** While efforts have been made to include data on non-Lebanese residents, there may still be gaps in the representation and understanding of their specific health needs and challenges.
+    """)
+    
+    st.write("**3. Contextual Factors:**")
+    st.write("""
+    - **Political and Economic Instability:** Lebanon's political and economic instability can impact healthcare infrastructure, resource allocation, and the implementation of health interventions, potentially influencing the outcomes presented in this dashboard.
+    - **Cultural and Social Norms:** Cultural and social norms surrounding maternal and reproductive health can vary widely and may affect the uptake and effectiveness of recommended interventions.
+    """)
+    
+    st.write("**4. Scope of Analysis:**")
+    st.write("""
+    - **Limited Indicators:** The dashboard focuses on specific indicators of maternal and reproductive health, and may not capture the full spectrum of factors influencing health outcomes, such as mental health, domestic violence, and environmental factors.
+    - **Intervention Impact:** While recommendations are based on data analysis, the dashboard does not include longitudinal studies or controlled trials that directly measure the impact of proposed interventions.
+    """)
+    
+    st.write("**5. Technical Limitations:**")
+    st.write("""
+    - **Visualization Constraints:** The graphical representations and visualizations used in this dashboard are subject to limitations in terms of resolution, interactivity, and the ability to convey complex data relationships.
+    - **User Accessibility:** Users with varying levels of technical expertise may experience difficulties navigating the dashboard or interpreting the visualizations, potentially limiting its usefulness for some audiences.
+    """)
+
+    st.write("""
+    Despite these limitations, this dashboard serves as a critical tool for understanding and improving maternal and reproductive health in Lebanon. Continuous efforts to enhance data collection, address gaps, and incorporate feedback will help refine and strengthen the insights provided by this platform.
     """)
