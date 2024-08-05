@@ -1473,7 +1473,7 @@ placeholder = st.empty()
 st.title("Lebanese Maternal and Reproductive Health Dashboard")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Introduction", "About", "Facts", "Graphs", "Recommendations"])
+page = st.sidebar.radio("Go to", ["Introduction", "About", "Facts", "Graphs", "Recommendations and Conclusion"])
 
 if page == "Introduction":
     st.header("Introduction")
@@ -1526,28 +1526,54 @@ elif page == "Graphs":
     elif option == "Comparison of Anemia in Non-Pregnant and Pregnant Women":
         st.pyplot(plot_anemia_comparison().gcf())
 
-elif page == "Recommendations":
+elif page == "Recommendations and Conclusion":
     st.header("Recommendations and Conclusion")
+    
+    st.subheader("Recommendations")
     st.write("""
-        Based on the analysis of maternal and reproductive health statistics in Lebanon, we offer the following recommendations:
-        
-        1. **Increase Access to Skilled Birth Attendants**: Ensure that all childbirths are attended by skilled professionals to reduce risks associated with unskilled attendants.
-        
-        2. **Improve Healthcare Facilities**: Enhance the quality and availability of healthcare facilities, particularly in public hospitals and rural areas.
-        
-        3. **Promote Cesarean Delivery Awareness**: Educate expecting mothers about the implications of cesarean deliveries and provide necessary support and guidance.
-        
-        4. **Reduce Neonatal Mortality**: Implement targeted interventions to reduce neonatal mortality rates, focusing on high-risk groups and areas.
-        
-        5. **Address Maternal Mortality**: Strengthen maternal healthcare services, particularly for non-Lebanese populations, to reduce maternal mortality rates.
-
-        These recommendations aim to improve maternal and reproductive health outcomes in Lebanon, ensuring better healthcare services and support for mothers and children.
+    Based on a comprehensive analysis of maternal and reproductive health statistics in Lebanon, we offer the following detailed recommendations:
     """)
+    
+    st.write("**1. Increase Access to Skilled Birth Attendants:**")
     st.write("""
-        In conclusion, our analysis highlights significant areas for improvement in maternal and reproductive health in Lebanon. 
-        By implementing the recommended strategies, we can enhance healthcare services, reduce mortality rates, and ensure a healthier future for mothers and children.
+    - **Training Programs:** Implement extensive training programs for midwives and birth attendants, ensuring they are equipped with the latest skills and knowledge.
+    - **Incentivize Placement in Rural Areas:** Provide incentives such as housing allowances, bonuses, and career development opportunities to encourage skilled professionals to work in underserved rural areas.
+    - **Mobile Clinics:** Deploy mobile clinics staffed with skilled birth attendants to reach remote and rural communities where access to healthcare facilities is limited.
+    """)
+    
+    st.write("**2. Improve Healthcare Facilities:**")
+    st.write("""
+    - **Infrastructure Investment:** Allocate funding to upgrade existing healthcare facilities, focusing on maternal and neonatal units. This includes improving sanitation, ensuring the availability of essential medical equipment, and maintaining a steady supply of necessary medications.
+    - **Public-Private Partnerships:** Encourage partnerships between public healthcare providers and private entities to improve service delivery and facility management.
+    - **Community Health Centers:** Establish more community health centers in rural and underserved areas, ensuring they are well-equipped and staffed to handle maternal and neonatal emergencies.
+    """)
+    
+    st.write("**3. Promote Cesarean Delivery Awareness:**")
+    st.write("""
+    - **Educational Campaigns:** Launch nationwide educational campaigns to inform expecting mothers about the benefits and risks associated with cesarean deliveries. Use multimedia platforms, including social media, to reach a broader audience.
+    - **Counseling Services:** Provide counseling services in prenatal clinics to discuss delivery options with expecting mothers, helping them make informed decisions based on their health and preferences.
+    - **Professional Development:** Conduct workshops for healthcare providers to update them on the latest best practices and guidelines for cesarean deliveries, ensuring they can offer the best advice and care.
+    """)
+    
+    st.write("**4. Reduce Neonatal Mortality:**")
+    st.write("""
+    - **Targeted Interventions:** Identify high-risk groups and regions with elevated neonatal mortality rates. Implement targeted interventions such as specialized neonatal care units and training for healthcare providers in these areas.
+    - **Early Detection Programs:** Develop and implement programs for early detection and management of neonatal complications, such as congenital anomalies and infections, to reduce mortality rates.
+    - **Parental Education:** Educate parents on neonatal care, emphasizing the importance of timely vaccinations, proper nutrition, and hygiene practices.
+    """)
+    
+    st.write("**5. Address Maternal Mortality:**")
+    st.write("""
+    - **Comprehensive Maternal Health Services:** Expand access to comprehensive maternal health services, including prenatal, intrapartum, and postpartum care, with a focus on non-Lebanese populations who often face barriers to healthcare access.
+    - **Emergency Obstetric Care:** Ensure that all healthcare facilities are equipped to handle obstetric emergencies, with clear protocols and rapid response teams in place.
+    - **Health Insurance Coverage:** Advocate for policies that provide health insurance coverage to all women, including refugees and migrant workers, to ensure they can access maternal health services without financial burden.
     """)
 
+    st.subheader("Conclusion")
+    st.write("""
+    Our analysis highlights significant areas for improvement in maternal and reproductive health in Lebanon. By implementing these detailed strategies, we can enhance healthcare services, reduce mortality rates, and ensure a healthier future for mothers and children. The focus on skilled birth attendants, improved healthcare facilities, cesarean delivery awareness, neonatal mortality reduction, and maternal mortality addressing are crucial steps toward achieving better health outcomes. Together, we can make a substantial impact and drive positive change in the health and well-being of mothers and their children across Lebanon.
+    """)
+    
 elif page == "Facts":
     st.header("Facts about Maternal and Reproductive Health in Lebanon")
     
