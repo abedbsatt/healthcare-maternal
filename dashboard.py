@@ -1473,7 +1473,7 @@ placeholder = st.empty()
 st.title("Lebanese Maternal and Reproductive Health Dashboard")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Introduction", "Facts", "Graphs", "Recommendations"])
+page = st.sidebar.radio("Go to", ["Introduction", "About", "Facts", "Graphs", "Recommendations"])
 
 if page == "Introduction":
     st.header("Introduction")
@@ -1646,3 +1646,14 @@ elif page == "Facts":
             </tbody>
         </table>
     """, unsafe_allow_html=True)
+    
+elif page == "About":
+    st.header("About")
+    st.write("""
+        This dashboard is developed to provide insights into maternal and reproductive health in Lebanon. Our goal is to support healthcare providers and policymakers in making informed decisions to improve health outcomes.
+        
+        **Project Team:**
+        - Houssem Chbichib
+        - Abed Bsat
+        - Adam Salha
+    """)
