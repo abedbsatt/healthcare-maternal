@@ -1377,24 +1377,35 @@ def load_and_clean_data(file_path):
 def plot_anemia_trends():
     file_path = "maternal_and_reproductive_health_indicators_lbn (1).csv"
     data = load_and_clean_data(file_path)
-    indicator_code = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
-    filtered_data = data[data['GHO_CODE'] == indicator_code]
+    
+    # Non-pregnant women with anemia
+    indicator_code_non_preg = 'NUTRITION_ANAEMIA_NONPREGNANT_NUM'
+    filtered_data_non_preg = data[data['GHO_CODE'] == indicator_code_non_preg]
+    
     plt.figure(figsize=(12, 6))
-    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data, marker='o')
-
-    plt.xticks(ticks=filtered_data['YEAR_DISPLAY'].unique(), 
-               labels=filtered_data['YEAR_DISPLAY'].unique().astype(int), 
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_non_preg, marker='o', label='Non-Pregnant Women')
+    
+    plt.xticks(ticks=filtered_data_non_preg['YEAR_DISPLAY'].unique(), 
+               labels=filtered_data_non_preg['YEAR_DISPLAY'].unique().astype(int), 
                rotation=0, fontweight='bold')
 
     plt.yticks(fontweight='bold')
 
-    plt.title('Trend of Number of Non-Pregnant Women with Anemia Over Years', fontweight='bold')
+    plt.title('Trend of Number of Women with Anemia Over Years', fontweight='bold')
     plt.xlabel('Year', fontweight='bold')
     plt.ylabel('Number of Women', fontweight='bold')
     plt.grid(False)
-
+    
     sns.set(style="whitegrid")
     sns.despine(left=True, bottom=True)
+
+    # Pregnant women with anemia
+    indicator_code_preg = 'NUTRITION_ANAEMIA_PREGNANT_NUM'
+    filtered_data_preg = data[data['GHO_CODE'] == indicator_code_preg]
+    
+    sns.lineplot(x='YEAR_DISPLAY', y='Numeric', data=filtered_data_preg, marker='o', label='Pregnant Women')
+    
+    plt.legend()
     plt.tight_layout()
     return plt
 
