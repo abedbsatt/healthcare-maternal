@@ -1346,6 +1346,12 @@ def maternal_mr_graph(start_year, end_year):
 # %% [markdown]
 # Loading CSV
 
+import streamlit as st
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+
 # %%
 def load_and_clean_data(file_path):
     data = pd.read_csv(file_path, skiprows=1)
